@@ -20,6 +20,13 @@ export interface RootWantOption {
   description: string;
 }
 
+/** Короткие именительные ярлыки для пилюль и истории — отличаются от родительного в карточках выбора. */
+export const ROOT_WANT_LABEL: Record<RootWant, string> = {
+  approval: "одобрение",
+  control: "контроль",
+  safety: "безопасность",
+};
+
 export const ROOT_WANTS: RootWantOption[] = [
   {
     id: "approval",
