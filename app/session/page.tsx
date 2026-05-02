@@ -74,6 +74,27 @@ export default function SessionPage() {
 
   const nextLabel = step === 5 ? "Завершить сессию" : "Дальше";
 
+  // Подсказка под disabled-кнопкой «Дальше». null когда валидно — место зарезервировано
+  // через min-h ниже, чтобы кнопка не прыгала при появлении/исчезновении подсказки.
+  function getNextHint(): string | null {
+    if (canNext) return null;
+    if (step === 1) {
+      if (situation.trim().length < 3) return "Опиши ситуацию, чтобы продолжить";
+      if (!intensityBeforeInteracted)
+        return "Дотронься до ползунка, чтобы зафиксировать интенсивность";
+    }
+    if (step === 2) {
+      if (feeling === null) return "Выбери чувство";
+      if (feeling === "другое" && customFeeling.trim().length === 0)
+        return "Назови своё чувство";
+    }
+    if (step === 3) {
+      if (rootWant === null) return "Выбери одно из трёх";
+    }
+    return null;
+  }
+  const nextHint = getNextHint();
+
   return (
     <div className="flex flex-col gap-6">
       <header className="flex items-center justify-between text-sm">
@@ -121,14 +142,22 @@ export default function SessionPage() {
         )}
       </div>
 
-      <button
-        type="button"
-        onClick={goNext}
-        disabled={!canNext}
-        className="rounded-lg bg-accent px-6 py-4 text-center text-base font-medium text-accent-fg transition active:opacity-80 disabled:opacity-40"
-      >
-        {nextLabel}
-      </button>
+      <div className="flex flex-col gap-1">
+        <button
+          type="button"
+          onClick={goNext}
+          disabled={!canNext}
+          className="rounded-lg bg-accent px-6 py-4 text-center text-base font-medium text-accent-fg transition active:opacity-80 disabled:opacity-40"
+        >
+          {nextLabel}
+        </button>
+        <p
+          className="min-h-4 text-center text-2xs text-tertiary"
+          aria-live="polite"
+        >
+          {nextHint ?? ""}
+        </p>
+      </div>
 
       <ConfirmDialog
         open={confirmExitOpen}

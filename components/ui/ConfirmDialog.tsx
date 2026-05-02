@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   open: boolean;
@@ -11,6 +11,12 @@ interface Props {
   onConfirm: () => void;
   onCancel: () => void;
   destructive?: boolean;
+}
+
+function dialogSupported(): boolean {
+  if (typeof window === "undefined") return true; // SSR — оптимистично
+  const proto = window.HTMLDialogElement?.prototype;
+  return typeof proto?.showModal === "function";
 }
 
 export function ConfirmDialog({
@@ -24,19 +30,54 @@ export function ConfirmDialog({
   destructive,
 }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
+  const [supported, setSupported] = useState(true);
+
+  // Колбэки в ref — чтобы effect ниже не пересоздавался от каждого render
+  // и при этом всегда видел свежие версии onConfirm/onCancel.
+  const onConfirmRef = useRef(onConfirm);
+  const onCancelRef = useRef(onCancel);
+  useEffect(() => {
+    onConfirmRef.current = onConfirm;
+    onCancelRef.current = onCancel;
+  });
 
   useEffect(() => {
-    const d = ref.current;
-    if (!d) return;
-    if (open && !d.open) {
-      try {
-        d.showModal();
-      } catch {
-        // Уже открыт — игнорируем.
-      }
+    setSupported(dialogSupported());
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      const d = ref.current;
+      if (d?.open) d.close();
+      return;
     }
-    if (!open && d.open) d.close();
-  }, [open]);
+
+    if (supported) {
+      const d = ref.current;
+      if (d && !d.open) {
+        try {
+          d.showModal();
+        } catch {
+          // На случай экзотических ошибок — деградируем до confirm().
+          fallback();
+        }
+      }
+      return;
+    }
+
+    fallback();
+
+    function fallback() {
+      const text = description ? `${title}\n\n${description}` : title;
+      // window.confirm — синхронный, блокирующий. Не модно, но работает на любом браузере.
+      const ok = window.confirm(text);
+      if (ok) onConfirmRef.current();
+      else onCancelRef.current();
+    }
+  }, [open, supported, title, description]);
+
+  // На неподдерживающих <dialog> — вообще ничего не рендерим, fallback идёт через confirm().
+  if (!supported) return null;
 
   return (
     <dialog
