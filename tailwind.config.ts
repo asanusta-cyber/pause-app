@@ -18,6 +18,7 @@ const config: Config = {
         "accent-fg": "var(--accent-fg)",
         "success-bg": "var(--success-bg)",
         "success-text": "var(--success-text)",
+        destructive: "var(--text-destructive)",
         border: "var(--border)",
       },
       fontFamily: {

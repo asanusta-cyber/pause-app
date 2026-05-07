@@ -13,6 +13,7 @@
   --accent-fg: #f7f5f0;
   --success-bg: #eaf3de;
   --success-text: #3b6d11;
+  --text-destructive: #a33a1a;
   --border: rgba(0, 0, 0, 0.1);
 }
 
@@ -28,6 +29,7 @@
     --accent-fg: #1a1816;
     --success-bg: #173404;
     --success-text: #c0dd97;
+    --text-destructive: #e08e6a;
     --border: rgba(255, 255, 255, 0.12);
   }
 }

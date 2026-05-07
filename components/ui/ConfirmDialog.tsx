@@ -105,7 +105,7 @@ export function ConfirmDialog({
           onClick={onConfirm}
           className={`rounded-lg px-4 py-2 text-sm font-medium ${
             destructive
-              ? "bg-secondary text-[#a33a1a] dark:text-[#e08e6a]"
+              ? "bg-secondary text-destructive"
               : "bg-accent text-accent-fg"
           }`}
         >

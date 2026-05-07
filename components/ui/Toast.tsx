@@ -7,6 +7,7 @@ const SHOW_MS = 3000;
 
 const MESSAGES: Record<string, string> = {
   saved: "Сессия сохранена",
+  deleted: "Сессия удалена",
 };
 
 /**
