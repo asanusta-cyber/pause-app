@@ -8,7 +8,7 @@ import { QUESTIONS, ROOT_WANT_LABEL } from "@/lib/constants";
 import { formatDuration, formatFullDateTime } from "@/lib/format";
 import { Pill } from "@/components/ui/Pill";
 import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
-import { TOAST_KEY } from "@/components/ui/Toast";
+import { setToast } from "@/components/ui/Toast";
 
 type State =
   | { status: "loading" }
@@ -53,7 +53,7 @@ export default function SessionDetailPage({
     setDeleting(true);
     try {
       await deleteSession(state.session.id!);
-      sessionStorage.setItem(TOAST_KEY, "deleted");
+      setToast("Сессия удалена");
       router.push("/history");
     } catch (err) {
       console.error("Не удалось удалить сессию", err);

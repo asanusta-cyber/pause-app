@@ -132,12 +132,15 @@ export async function exportAll(): Promise<Session[]> {
 
 export interface ImportResult {
   added: number;
-  skipped: number;
+  /** Сессия с таким `createdAt` уже есть в базе — пропущена. */
+  duplicate: number;
+  /** Запись не прошла валидацию структуры — пропущена. */
+  invalid: number;
 }
 
 /**
  * Импорт с дедупликацией по createdAt (миллисекундная точность).
- * Возвращает количество добавленных и пропущенных записей.
+ * Невалидные записи и дубли считаются отдельно.
  */
 export async function importSessions(items: unknown): Promise<ImportResult> {
   if (!Array.isArray(items)) throw new Error("Ожидался массив сессий");
@@ -146,16 +149,17 @@ export async function importSessions(items: unknown): Promise<ImportResult> {
   const existingKeys = new Set(existing.map((s) => s.createdAt));
 
   let added = 0;
-  let skipped = 0;
+  let duplicate = 0;
+  let invalid = 0;
   const toAdd: NewSession[] = [];
 
   for (const raw of items) {
     if (!isValidSession(raw)) {
-      skipped += 1;
+      invalid += 1;
       continue;
     }
     if (existingKeys.has(raw.createdAt)) {
-      skipped += 1;
+      duplicate += 1;
       continue;
     }
     const { id: _ignore, ...rest } = raw;
@@ -168,7 +172,7 @@ export async function importSessions(items: unknown): Promise<ImportResult> {
     added = toAdd.length;
   }
 
-  return { added, skipped };
+  return { added, duplicate, invalid };
 }
 
 function isValidSession(v: unknown): v is Session {

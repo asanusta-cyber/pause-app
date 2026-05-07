@@ -9,7 +9,7 @@ import { FeelingStep } from "@/components/session/FeelingStep";
 import { WantStep } from "@/components/session/WantStep";
 import { QuestionsStep } from "@/components/session/QuestionsStep";
 import { ReflectionStep } from "@/components/session/ReflectionStep";
-import { TOAST_KEY } from "@/components/ui/Toast";
+import { setToast } from "@/components/ui/Toast";
 import { createSession, type Feeling, type RootWant, type SessionQuestions } from "@/lib/db";
 
 type Step = 1 | 2 | 3 | 4 | 5;
@@ -93,7 +93,7 @@ export default function SessionPage() {
         intensityAfter,
         reflection: reflection.trim(),
       });
-      sessionStorage.setItem(TOAST_KEY, "saved");
+      setToast("Сессия сохранена");
       router.push("/");
     } catch (err) {
       console.error("Не удалось сохранить сессию", err);
