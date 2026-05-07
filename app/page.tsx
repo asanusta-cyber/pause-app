@@ -18,6 +18,7 @@ import {
   sessionsWord,
 } from "@/lib/format";
 import { Pill } from "@/components/ui/Pill";
+import { Toast } from "@/components/ui/Toast";
 
 export default function HomePage() {
   // Дата считается на клиенте, чтобы избежать SSR-рассинхрона.
@@ -34,6 +35,8 @@ export default function HomePage() {
   const hasAny = loaded && total > 0;
 
   return (
+    <>
+    <Toast />
     <div className="flex flex-col gap-6">
       <header className="flex min-h-14 flex-col gap-1">
         {now && (
@@ -87,6 +90,7 @@ export default function HomePage() {
         <Link href="/settings">Настройки</Link>
       </nav>
     </div>
+    </>
   );
 }
 
