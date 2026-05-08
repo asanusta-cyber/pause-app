@@ -234,7 +234,7 @@ export default function SessionPage() {
           {saving ? "Сохраняю…" : nextLabel}
         </button>
         <p
-          className="min-h-4 text-center text-2xs text-tertiary"
+          className="min-h-5 text-center text-2xs text-tertiary"
           aria-live="polite"
         >
           {nextHint ?? ""}

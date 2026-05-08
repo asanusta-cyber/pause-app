@@ -101,7 +101,7 @@ export default function SessionDetailPage({
   return (
     <div className="flex flex-col gap-6">
       <header className="flex items-center justify-between gap-2">
-        <Link href="/history" className="text-sm text-muted">
+        <Link href="/history" className="shrink-0 text-sm text-muted">
           ‹ история
         </Link>
         <span className="truncate text-right text-sm text-muted">

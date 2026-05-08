@@ -38,7 +38,7 @@ export default function HomePage() {
     <>
     <Toast />
     <div className="flex flex-col gap-6">
-      <header className="flex min-h-14 flex-col gap-1">
+      <header className="flex min-h-16 flex-col gap-1">
         {now && (
           <>
             <p className="text-sm text-muted">{formatTodayHeading(now)}</p>
