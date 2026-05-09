@@ -106,8 +106,8 @@ export const ROOT_WANT_HINTS: RootWantHint[] = [
   },
 ];
 
-export const APP_NAME = "Pause";
-export const APP_VERSION = "1.0.0";
+export const APP_NAME = "Levia";
+export const APP_VERSION = "0.1.0";
 
 export const ABOUT_TEXT =
   "Метод Седоны (Лестера Левенсона) — простая практика отпускания тяжёлых эмоций через пять последовательных шагов: назвать ситуацию, найти чувство, увидеть корневое «хочу», пройти четыре внутренних вопроса и заметить, что изменилось.";

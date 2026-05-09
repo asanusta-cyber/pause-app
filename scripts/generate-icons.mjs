@@ -2,7 +2,7 @@
 // Запуск: node scripts/generate-icons.mjs
 //
 // Дизайн: круг (для обычных иконок) или квадрат с safe-zone (для maskable)
-// фон #efede7 (наш bg-secondary), литера «P» цветом #1a1a1a, font-weight 500.
+// фон #efede7 (наш bg-secondary), литера «L» цветом #1a1a1a, font-weight 500.
 
 import sharp from "sharp";
 import { writeFile, mkdir } from "node:fs/promises";
@@ -34,7 +34,7 @@ function svgRound(size) {
         font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
         font-weight="500"
         font-size="${fontSize}"
-        fill="${FG}">P</text>
+        fill="${FG}">L</text>
 </svg>`;
 }
 
@@ -56,7 +56,7 @@ function svgMaskable(size) {
         font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
         font-weight="500"
         font-size="${fontSize}"
-        fill="${FG}">P</text>
+        fill="${FG}">L</text>
 </svg>`;
 }
 

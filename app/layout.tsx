@@ -3,14 +3,14 @@ import "./globals.css";
 import { ServiceWorkerRegister } from "@/components/ui/ServiceWorkerRegister";
 
 export const metadata: Metadata = {
-  title: "Pause — практика отпускания",
+  title: "Levia — практика отпускания",
   description: "Тихий дневник практики метода Седоны",
-  applicationName: "Pause",
+  applicationName: "Levia",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Pause",
+    title: "Levia",
   },
   icons: {
     icon: [

@@ -144,10 +144,10 @@ export function currentMonthLabel(date: Date = new Date()): string {
   return `${MONTHS_NOMINATIVE[date.getMonth()]} ${date.getFullYear()}`;
 }
 
-/** Имя файла бэкапа: pause-backup-2026-05-01.json */
+/** Имя файла бэкапа: levia-backup-2026-05-01.json */
 export function backupFilename(date: Date = new Date()): string {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");
   const d = String(date.getDate()).padStart(2, "0");
-  return `pause-backup-${y}-${m}-${d}.json`;
+  return `levia-backup-${y}-${m}-${d}.json`;
 }

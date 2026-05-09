@@ -71,13 +71,13 @@ export default function SettingsPage() {
       try {
         parsed = JSON.parse(text);
       } catch {
-        setToast("Файл не распознан как бэкап Pause");
+        setToast("Файл не распознан как бэкап Levia");
         return;
       }
 
       const items = unwrapImport(parsed);
       if (items === null) {
-        setToast("Файл не распознан как бэкап Pause");
+        setToast("Файл не распознан как бэкап Levia");
         return;
       }
 
