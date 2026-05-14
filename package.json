@@ -10,6 +10,7 @@
     "icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "dexie": "^4.4.2",
     "dexie-react-hooks": "^4.4.0",
     "next": "14.2.35",

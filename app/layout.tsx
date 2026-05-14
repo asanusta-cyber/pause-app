@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ServiceWorkerRegister } from "@/components/ui/ServiceWorkerRegister";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Levia — практика отпускания",
@@ -42,6 +43,7 @@ export default function RootLayout({
         <main className="mx-auto w-full max-w-md px-5 pb-12 pt-6 sm:max-w-lg">
           {children}
         </main>
+        <Analytics />
       </body>
     </html>
   );
